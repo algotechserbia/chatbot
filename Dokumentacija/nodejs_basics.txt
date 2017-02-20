@@ -1,0 +1,17 @@
+- najbitniji deo - BotConnector (web services - managed service) ( skype, viber, email, web, DIRECT LINE, facebook)
+- BotBuilder ( C# i NodeJS ) - poziva BotConnector web service
+    -> uid
+    -> history
+    -> channel
+    
+- FAQ i LUIS ( podeliti - ne treba sve vuci sa LUIS-a )
+
+    |---------------|                 |-------------|
+    | Bot connector | <-------------> | Bot builder |
+    |_______________|                 |_____________|
+       |
+       |
+       |
+       messaging endpoint
+       
+- QnA Maker - FAQ Engine
