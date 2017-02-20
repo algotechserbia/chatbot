@@ -15,3 +15,6 @@
        messaging endpoint
        
 - QnA Maker - FAQ Engine
+
+
+- LUIS - max 20 intenta - ne treba ih puno praviti
