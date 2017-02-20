@@ -1,32 +1,39 @@
-(function(){
+(function() {
     'use strict';
 
-    var builder = require('botbuilder'),
+    let builder = require('botbuilder'),
         restify = require('restify'),
         config  = require('./config.js'),
         request = require('superagent'),
         luisService = require('./services/luisService.js'),
         helloDialog = require('./dialogs/helloDialog.js'),
         mainDialog = require('./dialogs/mainMenuDialog.js'),
-        profilesChoiceDialog = require('./dialogs/profilesChoiceDialog.js');
+        profilesChoiceDialog = require('./dialogs/profilesChoiceDialog.js'),
+        faqService = require('./services/faqService.js');
 
-   var connector = new builder.ChatConnector({
+   let connector = new builder.ChatConnector({
         appId: config.appId,
         appPassword: config.password
     });
 
-    var bot = new builder.UniversalBot(connector);
+    let bot = new builder.UniversalBot(connector);
 
     // root dialog
     bot.dialog('/',[
         (session) => {
             if(session.message.text.match(/hello/i)){
-                luisService.get(session.message.text)
+                luisService.find(session.message.text)
                     .then((res)=>{
                         session.send(`Intent is : ${res.topScoringIntent.intent} with score : ${res.topScoringIntent.score}`);
                     }, (err) => {
-
                  });
+
+                faqService.find(session.message.text)
+                    .then((res) => {
+                        session.send(`FAQ answer is ${res.answer}`);
+                    }, (err) => {
+                        console.log(err);
+                });
             } else{
                 session.beginDialog('/hello');
             }
@@ -51,8 +58,7 @@
     // complaints choice dialog
     bot.dialog('/complaints_choice', []);
 
-
-    var server = restify.createServer();
+    let server = restify.createServer();
     server.listen(8080,() => {
         console.log('Starting up server....');
     });

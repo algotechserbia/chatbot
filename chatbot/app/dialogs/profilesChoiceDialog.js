@@ -1,11 +1,11 @@
-module.exports = (function(){
-    var builder = require('botbuilder');
+module.exports = (function() {
+    let builder = require('botbuilder');
 
     return {
         label: 'ProfilesChoiceDialog',
         resolveDialog: [
-            function(session){
-                 var msg = new builder
+            (session) => {
+                 let msg = new builder
                                 .Message(session)
                                 .attachmentLayout(builder.AttachmentLayout.carousel)
                                 .attachments([

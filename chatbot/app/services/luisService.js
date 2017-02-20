@@ -1,16 +1,16 @@
-module.exports = (function(){
+module.exports = (function() {
     'use strict';
 
-    var config = require('../config.js');
-    var request = require('superagent');
+    let config = require('../config.js'),
+        request = require('superagent');
 
-    function get(message){
+    function find(message){
         if(message == '') return Promise.reject('You didn\'t provide any message.');
 
         return new Promise((resolve,reject)=>{
             request
                .get(config.luisUrl)
-               .query({ 'subscription-key' : config.subscriptionKey })
+               .query({ 'subscription-key' : config.luisSubKey })
                .query({ verbose : true })
                .query({ q: message.replace(/\s/g,'+')})
                .then((res)=>
@@ -24,6 +24,6 @@ module.exports = (function(){
     }
 
     return {
-        get: get
+        find: find
     }
 }());

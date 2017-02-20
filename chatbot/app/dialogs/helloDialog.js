@@ -1,10 +1,10 @@
-module.exports = (function(){
-    var builder = require('botbuilder');
+module.exports = (function() {
+    let builder = require('botbuilder');
 
     return {
         label: 'HelloDialog',
         resolveDialog: [
-            function (session) {
+            (session) => {
             let card = new builder.HeroCard(session)
                             .title("Microsoft Bot Framework")
                             .text("Your bots - wherever your users are talking.")
