@@ -20,7 +20,7 @@
     // root dialog
     bot.dialog('/',[
         (session) => {
-            if(session.message.text.matches(/hello/i)){
+            if(session.message.text.match(/hello/i)){
                 luisService.get(session.message.text)
                     .then((res)=>{
                         session.send(`Intent is : ${res.topScoringIntent.intent} with score : ${res.topScoringIntent.score}`);
