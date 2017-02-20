@@ -1,5 +1,4 @@
 module.exports = (function(){
-
     var builder = require('botbuilder');
 
     return {
@@ -45,6 +44,9 @@ module.exports = (function(){
                                                 ])
                                             ]);
                 builder.Prompts.choice(session, msg, "select:100|select:101|select:102");
+            },
+            (session,results) => {
+                 session.endDialog();
             }
         ]
     }
