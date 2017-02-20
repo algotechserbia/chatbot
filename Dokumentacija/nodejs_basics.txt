@@ -18,3 +18,5 @@
 
 
 - LUIS - max 20 intenta - ne treba ih puno praviti
+
+- Pogledati app insights za logovanje - na azure-u je default
