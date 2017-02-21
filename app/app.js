@@ -19,8 +19,9 @@
     //let appInsightsClient = appInsights.getClient();
 
     // mstranslator setup client
+    // api_key : '022a695988aa441b9b13e91a352ee687'
     let mstranslatorClient = new mstranslator({
-        api_key:  '022a695988aa441b9b13e91a352ee687' || process.env.bingTranslate_api_key
+        api_key: process.env.bingTranslate_api_key
     }, true);
 
    let connector = new builder.ChatConnector({
