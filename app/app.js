@@ -65,7 +65,7 @@
     bot.dialog('/complaints_choice', []);
 
     let server = restify.createServer();
-    server.listen(process.env.PORT,() => {
+    server.listen(process.env.PORT || 8080,() => {
         console.log('Starting up server....');
     });
 
