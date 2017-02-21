@@ -11,11 +11,17 @@
         profilesChoiceDialog = require('./dialogs/profilesChoiceDialog.js'),
         faqService = require('./services/faqService.js'),
         appInsights = require('applicationinsights'),
-        telemetryCore = require('./core/telemetry.js');
+        telemetryCore = require('./core/telemetry.js'),
+        mstranslator = require('mstranslator');
 
     // appInsights setup
-    appInsights.setup(process.env.APPINSIGHTS_INSTRUMENTATIONKEY).start();
-    let appInsightsClient = appInsights.getClient();
+    //appInsights.setup(process.env.APPINSIGHTS_INSTRUMENTATIONKEY).start();
+    //let appInsightsClient = appInsights.getClient();
+
+    // mstranslator setup client
+    let mstranslatorClient = new mstranslator({
+        api_key:  '022a695988aa441b9b13e91a352ee687' || process.env.bingTranslate_api_key
+    }, true);
 
    let connector = new builder.ChatConnector({
         appId: process.env.MICROSOFT_APP_ID ,
@@ -42,10 +48,13 @@
                         console.log(err);
                 });
 
-                let telemetry = telemetryCore.createTelemetry(session);
-                appInsightsClient.trackEvent('hello', telemetry);
+                //let telemetry = telemetryCore.createTelemetry(session);
+                //appInsightsClient.trackEvent('hello', telemetry);
             } else{
-                session.beginDialog('/hello');
+                mstranslatorClient.translate({ text: session.message.text, from: 'sr', to: 'en' }, function(err, data) {
+                    session.send(data);
+                });
+                //session.beginDialog('/hello');
             }
     }]);
 
@@ -65,7 +74,7 @@
     bot.dialog('/complaints_choice', []);
 
     let server = restify.createServer();
-    server.listen(process.env.PORT,() => {
+    server.listen(process.env.PORT || 8080,() => {
         console.log('Starting up server....');
     });
 

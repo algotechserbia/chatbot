@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-      "start" : "node ./app/app.js"
+    "start": "node ./app/app.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "applicationinsights": "^0.18.0",
     "botbuilder": "^3.6.0",
+    "mstranslator": "^2.1.1",
     "restify": "^4.3.0",
     "superagent": "^3.4.4"
   }
