@@ -22,3 +22,6 @@
 - Pogledati app insights za logovanje - na azure-u je default
 
 - za app id, password ucitavanje pogledati MultiDialog primer za azure
+
+
+- application setting - ni slucajno postavljati PORT process.env.PORT
