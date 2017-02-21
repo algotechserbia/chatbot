@@ -10,7 +10,7 @@ module.exports = (function() {
         return new Promise((resolve,reject)=>{
             request
                .get(config.luisUrl)
-               .query({ 'subscription-key' : config.luisSubKey })
+               .query({ 'subscription-key' : process.env.LUIS_SUB_KEY })
                .query({ verbose : true })
                .query({ q: message.replace(/\s/g,'+')})
                .then((res)=>

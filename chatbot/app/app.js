@@ -9,14 +9,22 @@
         helloDialog = require('./dialogs/helloDialog.js'),
         mainDialog = require('./dialogs/mainMenuDialog.js'),
         profilesChoiceDialog = require('./dialogs/profilesChoiceDialog.js'),
-        faqService = require('./services/faqService.js');
+        faqService = require('./services/faqService.js'),
+        appInsights = require('applicationinsights'),
+        telemetryCore = require('./core/telemetry.js');
+
+    // appInsights setup
+    appInsights.setup(process.env.APPINSIGHTS_INSTRUMENTATIONKEY).start();
+    let appInsightsClient = appInsights.getClient();
 
    let connector = new builder.ChatConnector({
-        appId: config.appId,
-        appPassword: config.password
+        appId: process.env.MICROSOFT_APP_ID,
+        appPassword: process.env.MICROSOFT_APP_PASSWORD
     });
 
-    let bot = new builder.UniversalBot(connector);
+    let bot = new builder.UniversalBot(connector, (session)=>{
+        appInsightsClient.trackTrace('start', telemetryCore.createTelemetry(session, { setDefault : false }));
+    });
 
     // root dialog
     bot.dialog('/',[
@@ -34,6 +42,9 @@
                     }, (err) => {
                         console.log(err);
                 });
+
+                let telemetry = telemetryCore.createTelemetry(session);
+                appInsightsClient.trackEvent('hello', telemetry);
             } else{
                 session.beginDialog('/hello');
             }
@@ -59,7 +70,7 @@
     bot.dialog('/complaints_choice', []);
 
     let server = restify.createServer();
-    server.listen(8080,() => {
+    server.listen(process.env.PORT,() => {
         console.log('Starting up server....');
     });
 
