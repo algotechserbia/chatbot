@@ -3,15 +3,15 @@
 
     let builder = require('botbuilder'),
         restify = require('restify'),
-        config  = require('./config.js'),
+        config  = require('./app/config.js'),
         request = require('superagent'),
-        luisService = require('./services/luisService.js'),
-        helloDialog = require('./dialogs/helloDialog.js'),
-        mainDialog = require('./dialogs/mainMenuDialog.js'),
-        profilesChoiceDialog = require('./dialogs/profilesChoiceDialog.js'),
-        faqService = require('./services/faqService.js'),
+        luisService = require('./app/services/luisService.js'),
+        helloDialog = require('./app/dialogs/helloDialog.js'),
+        mainDialog = require('./app/dialogs/mainMenuDialog.js'),
+        profilesChoiceDialog = require('./app/dialogs/profilesChoiceDialog.js'),
+        faqService = require('./app/services/faqService.js'),
         appInsights = require('applicationinsights'),
-        telemetryCore = require('./core/telemetry.js');
+        telemetryCore = require('./app/core/telemetry.js');
 
     // appInsights setup
     appInsights.setup(process.env.APPINSIGHTS_INSTRUMENTATIONKEY).start();
