@@ -14,8 +14,8 @@
         telemetryCore = require('./core/telemetry.js');
 
     // appInsights setup
-    //appInsights.setup(process.env.APPINSIGHTS_INSTRUMENTATIONKEY).start();
-    //let appInsightsClient = appInsights.getClient();
+    appInsights.setup(process.env.APPINSIGHTS_INSTRUMENTATIONKEY).start();
+    let appInsightsClient = appInsights.getClient();
 
    let connector = new builder.ChatConnector({
         appId: process.env.MICROSOFT_APP_ID ,
@@ -32,7 +32,7 @@
                     .then((res)=>{
                         session.send(`Intent is : ${res.topScoringIntent.intent} with score : ${res.topScoringIntent.score}`);
                     }, (err) => {
-                    console.log(err);
+                        console.log(err);
                  });
 
                 faqService.find(session.message.text)
@@ -42,8 +42,8 @@
                         console.log(err);
                 });
 
-                //let telemetry = telemetryCore.createTelemetry(session);
-                //appInsightsClient.trackEvent('hello', telemetry);
+                let telemetry = telemetryCore.createTelemetry(session);
+                appInsightsClient.trackEvent('hello', telemetry);
             } else{
                 session.beginDialog('/hello');
             }
