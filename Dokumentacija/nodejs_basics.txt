@@ -23,5 +23,6 @@
 
 - za app id, password ucitavanje pogledati MultiDialog primer za azure
 
+- obratiti paznju na root aplikacije - ne postavljati kao root folder u kome se nalazi package.json ...
 
 - application setting - ni slucajno postavljati PORT process.env.PORT
