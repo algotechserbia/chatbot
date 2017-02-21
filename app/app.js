@@ -32,6 +32,7 @@
                     .then((res)=>{
                         session.send(`Intent is : ${res.topScoringIntent.intent} with score : ${res.topScoringIntent.score}`);
                     }, (err) => {
+                    console.log(err);
                  });
 
                 faqService.find(session.message.text)
@@ -64,7 +65,7 @@
     bot.dialog('/complaints_choice', []);
 
     let server = restify.createServer();
-    server.listen(process.env.PORT || 8080,() => {
+    server.listen(process.env.PORT,() => {
         console.log('Starting up server....');
     });
 
