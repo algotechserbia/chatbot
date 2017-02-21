@@ -11,7 +11,7 @@ module.exports = (function() {
             request
                 .post(config.faqURL)
                 .send({ question : message })
-                .set('Ocp-Apim-Subscription-Key' , process.env.FAQ_SUB_KEY)
+                .set('Ocp-Apim-Subscription-Key' , process.env.FAQ_SUB_KEY || 'c5586a05d36444f18dd4111c3462d80e')
                 .set('Content-Type', 'application/json')
                 .then((res) => {
                     resolve(res.body);

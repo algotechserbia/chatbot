@@ -18,8 +18,8 @@
     //let appInsightsClient = appInsights.getClient();
 
    let connector = new builder.ChatConnector({
-        appId: process.env.MICROSOFT_APP_ID,
-        appPassword: process.env.MICROSOFT_APP_PASSWORD
+        appId: process.env.MICROSOFT_APP_ID || 'e21f7458-05a4-4848-8ef7-71062bdb80b7',
+        appPassword: process.env.MICROSOFT_APP_PASSWORD || 'Qd9Z5mkSUDMwzRicqpxpry7'
     });
 
     let bot = new builder.UniversalBot(connector);
